@@ -1,0 +1,19 @@
+{
+    "extends": ["stylelint-config-standard", "stylelint-config-prettier", "stylelint-config-recommended-scss"],
+    "plugins": ["stylelint-order"],
+    "overrides": [
+        {
+            "files": ["**/*.(scss|css)"],
+            "customSyntax": "postcss-scss"
+        },
+        {
+            "files": ["**/*.(tsx)"],
+            "customSyntax": "postcss-html"
+        }
+    ],
+    "ignoreFiles": ["**/*.js", "**/*.jsx", "**/*.tsx", "**/*.ts", "**/*.json", "**/*.md", "**/*.yaml"],
+    "rules": {
+        "font-family-no-duplicate-names": null,
+        "no-descending-specificity": null
+    }
+}

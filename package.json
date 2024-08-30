@@ -1,0 +1,65 @@
+{
+    "name": "shuatiwu",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint --dir src",
+        "lint:lint-staged": "lint-staged",
+        "lint:style": "stylelint src/**/*.{css,scss,tsx} --fix",
+        "format": "prettier --write .",
+        "prepare": "husky",
+        "commit": "cz"
+    },
+    "dependencies": {
+        "@ant-design/nextjs-registry": "^1.0.1",
+        "antd": "^5.20.3",
+        "next": "14.2.7",
+        "react": "^18",
+        "react-dom": "^18"
+    },
+    "lint-staged": {
+        "*.{ts,tsx}": [
+            "pnpm lint",
+            "pnpm format",
+            "git add"
+        ],
+        "*.{css,scss}": "pnpm lint:style"
+    },
+    "config": {
+        "commitizen": {
+            "path": "cz-vinyl"
+        }
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^19.4.1",
+        "@commitlint/config-conventional": "^19.4.1",
+        "@eslint/js": "^9.9.1",
+        "@types/node": "^20",
+        "@types/react": "^18",
+        "@types/react-dom": "^18",
+        "commitizen": "^4.3.0",
+        "cz-vinyl": "^2.5.1",
+        "eslint": "^8.57.0",
+        "eslint-config-next": "14.2.7",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.2.1",
+        "eslint-plugin-react": "^7.35.0",
+        "husky": "^9.1.5",
+        "lint-staged": "^15.2.9",
+        "postcss-html": "^1.7.0",
+        "postcss-scss": "^4.0.9",
+        "prettier": "3.3.3",
+        "sass": "^1.77.8",
+        "sass-loader": "^16.0.1",
+        "stylelint": "^15.11.0",
+        "stylelint-config-prettier": "^9.0.5",
+        "stylelint-config-recommended-scss": "^14.1.0",
+        "stylelint-config-standard": "^34.0.0",
+        "stylelint-order": "^6.0.4",
+        "typescript": "^5",
+        "typescript-eslint": "^8.3.0"
+    }
+}
