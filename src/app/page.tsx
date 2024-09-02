@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { Button } from 'antd'
 
-const Page: React.FC = memo(() => {
+const App: React.FC = memo(() => {
     return (
         <div>
             <Button type='primary'>Primary Button</Button>
@@ -9,4 +9,4 @@ const Page: React.FC = memo(() => {
     )
 })
 
-export default Page
+export default App

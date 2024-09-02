@@ -23,7 +23,9 @@ module.exports = {
     rules: {
         '@typescript-eslint/no-non-null-assertion': 'off',
         'react/display-name': 'off',
-        'react/prop-types': 'off'
+        'react/prop-types': 'off',
+        '@typescript-eslint/ban-ts-comment': 'off',
+        'react-hooks/ exhaustive-deps': 'off'
     },
     settings: {
         react: {

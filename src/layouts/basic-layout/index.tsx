@@ -10,6 +10,9 @@ import { LogoutOutlined, SearchOutlined } from '@ant-design/icons'
 import { Dropdown, Input } from 'antd'
 import menuData from '@/menu'
 import GlobalFooter from '@/components/global-footer'
+import { shallowEqual, useSelector } from 'react-redux'
+import { RootState } from '@/store'
+import { useRouter } from 'next/navigation'
 
 const SearchInput = () => {
     return (
@@ -41,6 +44,13 @@ const SearchInput = () => {
 
 const BasicLayout: React.FC<BasicLayoutType> = memo(({ children }) => {
     const pathname = usePathname()
+    const { user } = useSelector(
+        (state: RootState) => ({
+            user: state.loginUser.defaultUser
+        }),
+        shallowEqual
+    )
+    const router = useRouter()
     return (
         <div className={styles['basic-layout']}>
             <ProLayout
@@ -55,10 +65,13 @@ const BasicLayout: React.FC<BasicLayoutType> = memo(({ children }) => {
                 )}
                 className={styles['pro-layout']}
                 avatarProps={{
-                    src: 'http://aklry.oss-cn-guangzhou.aliyuncs.com/2024/me.jpg',
+                    src: user?.userAvatar || '/notLoginUser.png',
                     size: 'small',
-                    title: 'aklry',
+                    title: user.userName || '匿名用户',
                     render: (_props, dom) => {
+                        if (!user.id) {
+                            return <div onClick={() => router.push('/user/login')}>{dom}</div>
+                        }
                         return (
                             <Dropdown
                                 menu={{
@@ -76,20 +89,12 @@ const BasicLayout: React.FC<BasicLayoutType> = memo(({ children }) => {
                         )
                     }
                 }}
-                headerTitleRender={(logo, title, _) => {
-                    const defaultDom = (
-                        <a>
-                            {logo}
-                            {title}
-                        </a>
-                    )
-                    if (typeof window === 'undefined') return defaultDom
-                    if (document.body.clientWidth < 1400) {
-                        return defaultDom
-                    }
-                    if (_.isMobile) return defaultDom
-                    return <>{defaultDom}</>
-                }}
+                headerTitleRender={(logo, title) => (
+                    <a>
+                        {logo}
+                        {title}
+                    </a>
+                )}
                 actionsRender={props => {
                     if (props.isMobile) return []
                     return [<SearchInput key='SearchInput' />]

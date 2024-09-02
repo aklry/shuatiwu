@@ -1,10 +1,12 @@
 'use client'
 import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './modules/counter'
+import loginUserReducer from '@/store/modules/loginUser'
 
 const store = configureStore({
     reducer: {
-        counter: counterReducer
+        counter: counterReducer,
+        loginUser: loginUserReducer
     }
 })
 export default store
