@@ -4,7 +4,7 @@ import '@/assets/styles/base/reset.scss'
 import BasicLayout from '@/layouts/basic-layout'
 
 import { Provider, useDispatch } from 'react-redux'
-import store from '@/store'
+import store, { AppDispatch } from '@/store'
 
 import React, { useCallback, useEffect } from 'react'
 import { getLoginUserUsingGet } from '@/api/userController'
@@ -22,7 +22,7 @@ const InitLayout: React.FC<
         children: React.ReactNode
     }>
 > = ({ children }) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const pathname = usePathname()
     /**
      * 全局初始化函数，有全局单次调用的代码，都可以写到这里
