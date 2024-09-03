@@ -5,17 +5,18 @@ import { BasicLayoutType } from '@/layouts/basic-layout/type'
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from './index.module.scss'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { LogoutOutlined, SearchOutlined } from '@ant-design/icons'
 import { Dropdown, Input, message } from 'antd'
-import { menus } from '@/menu'
+import { menus as defaultMenus } from '@/menu'
 import GlobalFooter from '@/components/global-footer'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store'
-import { useRouter } from 'next/navigation'
 import { userLogoutUsingPost } from '@/api/userController'
 import { setLoginUser } from '@/store/modules/loginUser'
 import { DEFAULT_USER } from '@/constants'
+import ACCESS_ENUM from '@/access/accessEnum'
+import checkAccess from '@/access/checkAccess'
 
 const SearchInput = () => {
     return (
@@ -54,6 +55,10 @@ const BasicLayout: React.FC<BasicLayoutType> = memo(({ children }) => {
         shallowEqual
     )
     const dispatch = useDispatch()
+    const menus = defaultMenus.filter(menu => {
+        const menuAccess = menu?.access ?? ACCESS_ENUM.NOT_LOGIN
+        return checkAccess(user, menuAccess)
+    })
     const router = useRouter()
     // 注销用户，退出登录
     const doLogout = async (e: { key: React.Key }) => {
