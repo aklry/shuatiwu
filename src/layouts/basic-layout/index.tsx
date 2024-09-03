@@ -7,12 +7,15 @@ import Image from 'next/image'
 import styles from './index.module.scss'
 import { usePathname } from 'next/navigation'
 import { LogoutOutlined, SearchOutlined } from '@ant-design/icons'
-import { Dropdown, Input } from 'antd'
-import menuData from '@/menu'
+import { Dropdown, Input, message } from 'antd'
+import { menus } from '@/menu'
 import GlobalFooter from '@/components/global-footer'
-import { shallowEqual, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import { useRouter } from 'next/navigation'
+import { userLogoutUsingPost } from '@/api/userController'
+import { setLoginUser } from '@/store/modules/loginUser'
+import { DEFAULT_USER } from '@/constants'
 
 const SearchInput = () => {
     return (
@@ -50,7 +53,22 @@ const BasicLayout: React.FC<BasicLayoutType> = memo(({ children }) => {
         }),
         shallowEqual
     )
+    const dispatch = useDispatch()
     const router = useRouter()
+    // 注销用户，退出登录
+    const doLogout = async (e: { key: React.Key }) => {
+        if (e.key === 'logout') {
+            try {
+                const res = await userLogoutUsingPost()
+                if (res.data) {
+                    router.push('/user/login')
+                    dispatch(setLoginUser(DEFAULT_USER))
+                }
+            } catch (e: any) {
+                message.error('退出失败', e.message)
+            }
+        }
+    }
     return (
         <div className={styles['basic-layout']}>
             <ProLayout
@@ -81,7 +99,8 @@ const BasicLayout: React.FC<BasicLayoutType> = memo(({ children }) => {
                                             icon: <LogoutOutlined />,
                                             label: '退出登录'
                                         }
-                                    ]
+                                    ],
+                                    onClick: doLogout
                                 }}
                             >
                                 {dom}
@@ -99,7 +118,7 @@ const BasicLayout: React.FC<BasicLayoutType> = memo(({ children }) => {
                     if (props.isMobile) return []
                     return [<SearchInput key='SearchInput' />]
                 }}
-                menuDataRender={() => menuData}
+                menuDataRender={() => menus}
                 footerRender={() => <GlobalFooter />}
             >
                 {children}

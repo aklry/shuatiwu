@@ -1,11 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-// 默认用户
-const DEFAULT_USER: API.LoginUserVO = {
-    userName: '未登录',
-    userProfile: '暂无简介',
-    userAvatar: '/notLoginUser.png',
-    userRole: 'guest'
-}
+import { DEFAULT_USER } from '@/constants'
 
 const loginUserSlice = createSlice({
     name: 'loginUser',

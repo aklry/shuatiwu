@@ -6,11 +6,12 @@ import BasicLayout from '@/layouts/basic-layout'
 import { Provider, useDispatch } from 'react-redux'
 import store, { AppDispatch } from '@/store'
 
-import React, { useCallback, useEffect } from 'react'
+import React, { memo, useCallback, useEffect } from 'react'
 import { getLoginUserUsingGet } from '@/api/userController'
 import { setLoginUser } from '@/store/modules/loginUser'
 import { usePathname } from 'next/navigation'
 import { message } from 'antd'
+import AccountLayout from './account-layout'
 
 /**
  * 执行初始化逻辑的布局（多封装一层）
@@ -46,22 +47,21 @@ const InitLayout: React.FC<
     return <>{children}</>
 }
 
-export default function RootLayout({
-    children
-}: Readonly<{
-    children: React.ReactNode
-}>) {
+const RootLayout: React.FC<Readonly<{ children: React.ReactNode }>> = memo(({ children }) => {
     return (
         <html lang='en'>
             <body>
                 <AntdRegistry>
                     <Provider store={store}>
                         <InitLayout>
-                            <BasicLayout>{children}</BasicLayout>
+                            <BasicLayout>
+                                <AccountLayout>{children}</AccountLayout>
+                            </BasicLayout>
                         </InitLayout>
                     </Provider>
                 </AntdRegistry>
             </body>
         </html>
     )
-}
+})
+export default RootLayout
