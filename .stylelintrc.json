@@ -1,20 +1,54 @@
 {
-    "extends": ["stylelint-config-standard", "stylelint-config-prettier", "stylelint-config-recommended-scss"],
-    "plugins": ["stylelint-order"],
+    "extends": [
+        "stylelint-config-standard",
+        "stylelint-config-prettier",
+        "stylelint-config-recommended-scss",
+        "stylelint-config-css-modules"
+    ],
+    "plugins": [
+        "stylelint-order"
+    ],
     "overrides": [
         {
-            "files": ["**/*.(scss|css)"],
+            "files": [
+                "**/*.(scss|css)"
+            ],
             "customSyntax": "postcss-scss"
         },
         {
-            "files": ["**/*.(tsx)"],
+            "files": [
+                "**/*.(tsx)"
+            ],
             "customSyntax": "postcss-html"
         }
     ],
-    "ignoreFiles": ["**/*.js", "**/*.jsx", "**/*.tsx", "**/*.ts", "**/*.json", "**/*.md", "**/*.yaml"],
+    "ignoreFiles": [
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.tsx",
+        "**/*.ts",
+        "**/*.json",
+        "**/*.md",
+        "**/*.yaml"
+    ],
     "rules": {
         "font-family-no-duplicate-names": null,
         "no-descending-specificity": null,
-        "selector-pseudo-class-no-unknown": null
+        "selector-pseudo-class-no-unknown": [
+            true,
+            {
+                "ignorePseudoClasses": [
+                    ":global"
+                ]
+            }
+        ],
+        "selector-pseudo-element-no-unknown": [
+            true,
+            {
+                "ignorePseudoElements": [
+                    ":global"
+                ]
+            }
+        ]
     }
 }
