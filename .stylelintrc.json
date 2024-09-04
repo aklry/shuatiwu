@@ -38,7 +38,7 @@
             true,
             {
                 "ignorePseudoClasses": [
-                    ":global"
+                    "global"
                 ]
             }
         ],
@@ -46,7 +46,7 @@
             true,
             {
                 "ignorePseudoElements": [
-                    ":global"
+                    "global"
                 ]
             }
         ]
