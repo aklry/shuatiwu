@@ -14,12 +14,12 @@ const Question: React.FC = memo(() => {
     const [pageNumber, setPageNumber] = useState<number>(1)
     // 弹窗状态
     const [visible, setVisible] = useState<boolean>(false)
-    const [currentRow, setCurrentRow] = useState<API.User>()
+    const [currentRow, setCurrentRow] = useState<API.Question>()
     // 弹窗标题
     const [modalTitle, setModalTitle] = useState<string>('')
     const fetchQuestionData = async (pageNumber: number, args?: API.QuestionQueryRequest) => {
         try {
-            const requestParams: API.UserQueryRequest = args
+            const requestParams: API.QuestionQueryRequest = args
                 ? args
                 : {
                       pageSize: 5,

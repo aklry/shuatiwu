@@ -116,7 +116,7 @@ const Bank: React.FC = () => {
     ]
     const fetchQuestionBankData = async (pageNumber: number, args?: API.QuestionBankQueryRequest) => {
         try {
-            const requestParams: API.UserQueryRequest = args
+            const requestParams: API.QuestionBankQueryRequest = args
                 ? args
                 : {
                       pageSize: 5,
@@ -165,7 +165,7 @@ const Bank: React.FC = () => {
     }
     return (
         <div className={styles['admin-bank']}>
-            <ProTable<API.User>
+            <ProTable<API.Question>
                 columns={columns}
                 editable={{
                     type: 'multiple'
