@@ -36,7 +36,7 @@ const UploadPicture: React.FC<UploadPictureProps> = memo(({ imageUrl, onChange, 
             const res = await uploadFileUsingPost({ biz }, {}, info.file as FileType)
             if (res.data) {
                 setLoading(false)
-                onChange(res.data)
+                onChange?.(res.data)
             } else {
                 message.error('上传图片失败, ' + res.message)
             }
@@ -52,7 +52,7 @@ const UploadPicture: React.FC<UploadPictureProps> = memo(({ imageUrl, onChange, 
             customRequest={handleRequest}
             beforeUpload={beforeUpload}
         >
-            {imageUrl ? <Image src={imageUrl} alt='avatar' style={{ width: '100%' }} /> : uploadButton}
+            {imageUrl ? <Image src={imageUrl} alt='avatar' width={100} height={100} /> : uploadButton}
         </Upload>
     )
 })
