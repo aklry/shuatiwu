@@ -5,4 +5,8 @@
     .pro-layout {
         height: 100%;
     }
+
+    & :global(.ant-pro-layout .ant-pro-layout-content) {
+        padding-block: 20px;
+    }
 }

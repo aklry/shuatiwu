@@ -1,0 +1,5 @@
+.admin-bank {
+    & :global(.ant-table) {
+        scrollbar-color: transparent transparent !important;
+    }
+}

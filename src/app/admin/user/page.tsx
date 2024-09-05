@@ -17,7 +17,7 @@ import UploadPicture from '@/components/upload-picture'
 const AdminUser: React.FC = () => {
     const [pageNumber, setPageNumber] = useState<number>(1)
     const [total, setTotal] = useState<number>(0)
-    const [dataSource, setDataSource] = useState<API.UserVO[]>()
+    const [dataSource, setDataSource] = useState<API.User[]>()
     // 弹窗状态
     const [visible, setVisible] = useState<boolean>(false)
     const [currentRow, setCurrentRow] = useState<API.User>()

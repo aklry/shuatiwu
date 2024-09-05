@@ -4,7 +4,7 @@ export interface IModalProps {
     title: string
     visible: boolean
     columns: ProColumns<API.User>[]
-    onSubmit: (values: API.UserAddRequest | API.UserUpdateRequest) => void
+    onSubmit: (values: any) => void
     onCancel: () => void
     oldData?: API.User
 }
