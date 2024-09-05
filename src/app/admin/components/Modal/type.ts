@@ -6,5 +6,5 @@ export interface IModalProps {
     columns: ProColumns<API.User>[]
     onSubmit: (values: any) => void
     onCancel: () => void
-    oldData?: API.User
+    oldData?: any
 }

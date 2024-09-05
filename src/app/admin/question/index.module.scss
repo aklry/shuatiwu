@@ -1,0 +1,7 @@
+.question {
+    & :global(.ant-table) {
+        //scrollbar-color: transparent transparent !important;
+        max-height: 500px;
+        overflow: auto;
+    }
+}
