@@ -1,12 +1,13 @@
 'use client'
 import React, { memo, useEffect, useState } from 'react'
 import styles from './index.module.scss'
-import { Button, message, Space, Tag, Typography } from 'antd'
+import { Button, message, Space, Typography } from 'antd'
 import { ProColumns, ProTable } from '@ant-design/pro-components'
 import { PlusOutlined } from '@ant-design/icons'
 import CommonModal from '@/app/admin/components/Modal'
 import { addQuestionUsingPost, listQuestionByPageUsingPost, updateQuestionUsingPost } from '@/api/questionController'
 import MdEditor from '@/components/md-editor'
+import TagList from '@/components/tag-list'
 
 const Question: React.FC = memo(() => {
     const [dataSource, setDataSource] = useState<API.Question[]>()
@@ -117,11 +118,7 @@ const Question: React.FC = memo(() => {
             },
             render: (_, record) => {
                 const tags = JSON.parse(record.tags as string)
-                return tags.map((tag: string) => (
-                    <Tag color='success' key={tag}>
-                        {tag}
-                    </Tag>
-                ))
+                return <TagList tags={tags} />
             }
         },
         {
