@@ -31,7 +31,6 @@
             {
                 "ignorePseudoElements": ["global"]
             }
-        ],
-        "value-no-vendor-prefix": null
+        ]
     }
 }
