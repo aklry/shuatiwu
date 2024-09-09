@@ -1,0 +1,6 @@
+@import '@/assets/styles/base/global';
+
+.question-detail {
+    width: 100%;
+    @include container;
+}

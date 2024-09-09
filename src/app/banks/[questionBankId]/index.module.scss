@@ -1,0 +1,7 @@
+@import '@/assets/styles/base/global';
+
+.question-bank-details {
+    @include container;
+
+    width: 100%;
+}

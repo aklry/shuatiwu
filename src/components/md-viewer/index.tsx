@@ -5,6 +5,7 @@ import 'bytemd/dist/index.css'
 import 'highlight.js/styles/vs.css'
 import { IMdViewerProps } from '@/components/md-viewer/type'
 import React from 'react'
+import 'github-markdown-css/github-markdown-light.css'
 
 const plugins = [gfm(), highlight()]
 
