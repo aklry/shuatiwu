@@ -1,3 +1,6 @@
+@import url('@/assets/styles/base/global');
+
 .question-container {
     width: 100%;
+    @include container;
 }

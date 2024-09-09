@@ -19,6 +19,7 @@ import ACCESS_ENUM from '@/access/accessEnum'
 import checkAccess from '@/access/checkAccess'
 
 const SearchInput = () => {
+    const router = useRouter()
     return (
         <div
             key='SearchOutlined'
@@ -33,7 +34,7 @@ const SearchInput = () => {
                 e.preventDefault()
             }}
         >
-            <Input
+            <Input.Search
                 style={{
                     borderRadius: 4,
                     marginInlineEnd: 12
@@ -41,6 +42,7 @@ const SearchInput = () => {
                 prefix={<SearchOutlined />}
                 placeholder='搜索题目'
                 variant='borderless'
+                onSearch={value => router.push(`/questions?q=${value}`)}
             />
         </div>
     )

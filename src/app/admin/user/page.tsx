@@ -13,6 +13,7 @@ import {
 } from '@/api/userController'
 import CommonModal from '@/app/admin/components/Modal'
 import UploadPicture from '@/components/upload-picture'
+import { DEFAULT_PAGE_SIZE } from '@/constants'
 
 const AdminUser: React.FC = () => {
     const [pageNumber, setPageNumber] = useState<number>(1)
@@ -29,7 +30,7 @@ const AdminUser: React.FC = () => {
             const requestParams: API.UserQueryRequest = args
                 ? args
                 : {
-                      pageSize: 5,
+                      pageSize: DEFAULT_PAGE_SIZE,
                       current: pageNumber
                   }
             const res = await listUserByPageUsingPost(requestParams)
@@ -192,7 +193,7 @@ const AdminUser: React.FC = () => {
                     labelWidth: 'auto'
                 }}
                 pagination={{
-                    pageSize: 5,
+                    pageSize: DEFAULT_PAGE_SIZE,
                     onChange: page => setPageNumber(page),
                     total
                 }}

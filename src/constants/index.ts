@@ -6,3 +6,5 @@ export const DEFAULT_USER: API.LoginUserVO = {
     userAvatar: '/notLoginUser.png',
     userRole: AccessEnum.NOT_LOGIN
 }
+
+export const DEFAULT_PAGE_SIZE = 12

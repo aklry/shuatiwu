@@ -8,6 +8,7 @@ import CommonModal from '@/app/admin/components/Modal'
 import { addQuestionUsingPost, listQuestionByPageUsingPost, updateQuestionUsingPost } from '@/api/questionController'
 import MdEditor from '@/components/md-editor'
 import TagList from '@/components/tag-list'
+import { DEFAULT_PAGE_SIZE } from '@/constants'
 
 const Question: React.FC = memo(() => {
     const [dataSource, setDataSource] = useState<API.Question[]>()
@@ -23,7 +24,7 @@ const Question: React.FC = memo(() => {
             const requestParams: API.QuestionQueryRequest = args
                 ? args
                 : {
-                      pageSize: 5,
+                      pageSize: DEFAULT_PAGE_SIZE,
                       current: pageNumber
                   }
             const res = await listQuestionByPageUsingPost(requestParams)
@@ -183,7 +184,7 @@ const Question: React.FC = memo(() => {
                     labelWidth: 'auto'
                 }}
                 pagination={{
-                    pageSize: 5,
+                    pageSize: DEFAULT_PAGE_SIZE,
                     onChange: page => setPageNumber(page),
                     total
                 }}

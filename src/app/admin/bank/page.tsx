@@ -12,6 +12,7 @@ import {
 import styles from './index.module.scss'
 import CommonModal from '@/app/admin/components/Modal'
 import UploadPicture from '@/components/upload-picture'
+import { DEFAULT_PAGE_SIZE } from '@/constants'
 
 const Bank: React.FC = () => {
     const [pageNumber, setPageNumber] = useState<number>(1)
@@ -119,7 +120,7 @@ const Bank: React.FC = () => {
             const requestParams: API.QuestionBankQueryRequest = args
                 ? args
                 : {
-                      pageSize: 5,
+                      pageSize: DEFAULT_PAGE_SIZE,
                       current: pageNumber
                   }
             const res = await listQuestionBankByPageUsingPost(requestParams)
@@ -177,7 +178,7 @@ const Bank: React.FC = () => {
                     labelWidth: 'auto'
                 }}
                 pagination={{
-                    pageSize: 5,
+                    pageSize: DEFAULT_PAGE_SIZE,
                     onChange: page => setPageNumber(page),
                     total
                 }}
