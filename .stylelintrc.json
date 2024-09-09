@@ -20,6 +20,7 @@
     "rules": {
         "font-family-no-duplicate-names": null,
         "no-descending-specificity": null,
+        "import-notation": "string",
         "selector-pseudo-class-no-unknown": [
             true,
             {
