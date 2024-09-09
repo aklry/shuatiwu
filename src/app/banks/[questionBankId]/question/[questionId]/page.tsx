@@ -19,7 +19,7 @@ const QuestionDetail: React.FC<IQuestionDetailProps> = async ({ params }) => {
 
     try {
         const res = await getQuestionBankVoByIdUsingGet({
-            id: questionBankId,
+            id: parseInt(questionBankId),
             needQueryQuestionList: true,
             pageSize: 200
         })
@@ -30,7 +30,7 @@ const QuestionDetail: React.FC<IQuestionDetailProps> = async ({ params }) => {
 
     try {
         const res = await getQuestionVoByIdUsingGet({
-            id: questionId
+            id: parseInt(questionId)
         })
         questionDetail = res.data as API.QuestionVO
     } catch (e: any) {

@@ -1,3 +1,6 @@
+interface IRouterParams {
+    questionBankId: number
+}
 export interface IQuestionBankDetailProps {
-    params: any
+    params: IRouterParams
 }

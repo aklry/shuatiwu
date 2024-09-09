@@ -1,3 +1,6 @@
+interface IRouterParams {
+    questionId: string
+}
 export interface IQuestionDetailProps {
-    params: any
+    params: IRouterParams
 }
