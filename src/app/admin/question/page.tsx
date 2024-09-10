@@ -19,6 +19,8 @@ const Question: React.FC = memo(() => {
     const [currentRow, setCurrentRow] = useState<API.Question>()
     // 弹窗标题
     const [modalTitle, setModalTitle] = useState<string>('')
+    // 是否修改所属题库
+    const [isChangeQuestionBank, setIsChangeQuestionBank] = useState<boolean>(false)
     const fetchQuestionData = async (pageNumber: number, args?: API.QuestionQueryRequest) => {
         try {
             const requestParams: API.QuestionQueryRequest = args
@@ -42,8 +44,12 @@ const Question: React.FC = memo(() => {
     const handleReset = async () => {
         await fetchQuestionData(pageNumber)
     }
-    const handleShowModal = (question?: API.Question) => {
-        if (question) {
+    const handleShowModal = (question?: API.Question, isEditBank?: boolean) => {
+        if (question && isEditBank) {
+            setModalTitle('修改所属题库')
+            setIsChangeQuestionBank(true)
+            setCurrentRow(question)
+        } else if (question) {
             setModalTitle('修改用户')
             setCurrentRow(question)
         } else {
@@ -85,6 +91,12 @@ const Question: React.FC = memo(() => {
             valueType: 'text',
             hideInForm: true,
             width: 80
+        },
+        {
+            title: '所属题库',
+            dataIndex: 'questionBankId',
+            hideInForm: true,
+            hideInTable: true
         },
         {
             title: '标题',
@@ -132,7 +144,6 @@ const Question: React.FC = memo(() => {
 
         {
             title: '创建时间',
-            sorter: true,
             dataIndex: 'createTime',
             valueType: 'dateTime',
             hideInSearch: true,
@@ -141,7 +152,6 @@ const Question: React.FC = memo(() => {
         },
         {
             title: '编辑时间',
-            sorter: true,
             dataIndex: 'editTime',
             valueType: 'dateTime',
             hideInSearch: true,
@@ -150,7 +160,6 @@ const Question: React.FC = memo(() => {
         },
         {
             title: '更新时间',
-            sorter: true,
             dataIndex: 'updateTime',
             valueType: 'dateTime',
             hideInSearch: true,
@@ -164,10 +173,11 @@ const Question: React.FC = memo(() => {
             render: (_, record) => (
                 <Space size='middle'>
                     <Typography.Link onClick={() => handleShowModal(record)}>修改</Typography.Link>
+                    <Typography.Link onClick={() => handleShowModal(record, true)}>修改所属题库</Typography.Link>
                     <Typography.Link type='danger'>删除</Typography.Link>
                 </Space>
             ),
-            width: 120
+            width: 240
         }
     ]
 
@@ -205,6 +215,8 @@ const Question: React.FC = memo(() => {
                 columns={columns}
                 onSubmit={handleSubmit}
                 onCancel={() => setVisible(false)}
+                isEditBank={isChangeQuestionBank}
+                questionBankId={currentRow?.id}
             />
         </div>
     )
