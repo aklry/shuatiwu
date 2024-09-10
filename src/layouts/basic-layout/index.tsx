@@ -27,7 +27,8 @@ const SearchInput = () => {
             style={{
                 display: 'flex',
                 alignItems: 'center',
-                marginInlineEnd: 24
+                marginInlineEnd: 24,
+                padding: 0
             }}
             onMouseDown={e => {
                 e.stopPropagation()
@@ -36,8 +37,7 @@ const SearchInput = () => {
         >
             <Input.Search
                 style={{
-                    borderRadius: 4,
-                    marginInlineEnd: 12
+                    borderRadius: 4
                 }}
                 prefix={<SearchOutlined />}
                 placeholder='搜索题目'

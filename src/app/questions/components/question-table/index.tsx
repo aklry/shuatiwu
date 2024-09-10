@@ -66,6 +66,7 @@ const QuestionTable: React.FC<IQuestionTableProps> = ({
                     const sortOrder = sorter?.[sortField] || 'descend'
                     const { data, code } = await listQuestionVoByPageUsingPost({
                         ...params,
+                        tags: params.tagList,
                         sortField,
                         sortOrder
                     })
