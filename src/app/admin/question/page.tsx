@@ -52,9 +52,11 @@ const Question: React.FC = memo(() => {
         } else if (question) {
             setModalTitle('修改用户')
             setCurrentRow(question)
+            setIsChangeQuestionBank(false)
         } else {
             setCurrentRow(undefined)
             setModalTitle('新建用户')
+            setIsChangeQuestionBank(false)
         }
         setVisible(true)
     }
@@ -172,7 +174,7 @@ const Question: React.FC = memo(() => {
             valueType: 'option',
             render: (_, record) => (
                 <Space size='middle'>
-                    <Typography.Link onClick={() => handleShowModal(record)}>修改</Typography.Link>
+                    <Typography.Link onClick={() => handleShowModal(record, false)}>修改</Typography.Link>
                     <Typography.Link onClick={() => handleShowModal(record, true)}>修改所属题库</Typography.Link>
                     <Typography.Link type='danger'>删除</Typography.Link>
                 </Space>
