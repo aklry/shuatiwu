@@ -1,11 +1,16 @@
 'use client'
 import React, { memo, useEffect, useState } from 'react'
 import styles from './index.module.scss'
-import { Button, message, Space, Typography } from 'antd'
+import { Button, message, Popconfirm, Space, Typography } from 'antd'
 import { ProColumns, ProTable } from '@ant-design/pro-components'
 import { PlusOutlined } from '@ant-design/icons'
 import CommonModal from '@/app/admin/components/Modal'
-import { addQuestionUsingPost, listQuestionByPageUsingPost, updateQuestionUsingPost } from '@/api/questionController'
+import {
+    addQuestionUsingPost,
+    deleteQuestionUsingPost,
+    listQuestionByPageUsingPost,
+    updateQuestionUsingPost
+} from '@/api/questionController'
 import MdEditor from '@/components/md-editor'
 import TagList from '@/components/tag-list'
 import { DEFAULT_PAGE_SIZE } from '@/constants'
@@ -81,6 +86,20 @@ const Question: React.FC = memo(() => {
             } else {
                 message.error('新增失败,' + res.message)
             }
+        }
+    }
+    // 删除题目
+    const handleDeleteQuestion = async (id?: number) => {
+        try {
+            const res = await deleteQuestionUsingPost({
+                id
+            })
+            if (res.data) {
+                message.success('删除成功')
+                fetchQuestionData(pageNumber)
+            }
+        } catch (e: any) {
+            message.error(e.message)
         }
     }
     useEffect(() => {
@@ -176,7 +195,15 @@ const Question: React.FC = memo(() => {
                 <Space size='middle'>
                     <Typography.Link onClick={() => handleShowModal(record, false)}>修改</Typography.Link>
                     <Typography.Link onClick={() => handleShowModal(record, true)}>修改所属题库</Typography.Link>
-                    <Typography.Link type='danger'>删除</Typography.Link>
+                    <Popconfirm
+                        title='删除该题目？'
+                        description='删除后将无法恢复，请谨慎操作！'
+                        onConfirm={() => handleDeleteQuestion(record.id)}
+                        okText='确认'
+                        cancelText='取消'
+                    >
+                        <Typography.Link type='danger'>删除</Typography.Link>
+                    </Popconfirm>
                 </Space>
             ),
             width: 240
