@@ -45,7 +45,10 @@ const AdminUser: React.FC = () => {
     const handleShowModal = (user?: API.User) => {
         if (user) {
             setModalTitle('修改用户')
-            setCurrentRow(user)
+            setCurrentRow({
+                ...user,
+                userAvatar: user.userAvatar ?? 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+            })
         } else {
             setCurrentRow(undefined)
             setModalTitle('新建用户')
@@ -85,7 +88,9 @@ const AdminUser: React.FC = () => {
         {
             title: '头像',
             dataIndex: 'userAvatar',
-            render: (_text, record) => <Avatar src={record.userAvatar || '/logo.png'} />,
+            render: (_text, record) => (
+                <Avatar src={record.userAvatar ?? 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'} />
+            ),
             hideInSearch: true,
             renderFormItem: (_item, record) => {
                 if (record.value) {
