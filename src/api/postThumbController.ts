@@ -1,3 +1,4 @@
+// @ts-ignore
 /* eslint-disable */
 import ryRequest from '@/services'
 

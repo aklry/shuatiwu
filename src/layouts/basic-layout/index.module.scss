@@ -1,6 +1,7 @@
 .basic-layout {
     height: 100vh;
     overflow: auto;
+    user-select: none;
 
     .pro-layout {
         height: 100%;

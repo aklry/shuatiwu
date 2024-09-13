@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styles from './index.module.scss'
 import { usePathname, useRouter } from 'next/navigation'
-import { LogoutOutlined, SearchOutlined } from '@ant-design/icons'
+import { LogoutOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons'
 import { Dropdown, Input, message } from 'antd'
 import { menus as defaultMenus } from '@/menu'
 import GlobalFooter from '@/components/global-footer'
@@ -74,6 +74,8 @@ const BasicLayout: React.FC<BasicLayoutType> = memo(({ children }) => {
             } catch (e: any) {
                 message.error('退出失败', e.message)
             }
+        } else if (e.key === 'userCenter') {
+            router.push('/user/center')
         }
     }
     return (
@@ -90,7 +92,7 @@ const BasicLayout: React.FC<BasicLayoutType> = memo(({ children }) => {
                 )}
                 className={styles['pro-layout']}
                 avatarProps={{
-                    src: user?.userAvatar || '/notLoginUser.png',
+                    src: user?.userAvatar || 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
                     size: 'small',
                     title: user.userName || '匿名用户',
                     render: (_props, dom) => {
@@ -101,6 +103,11 @@ const BasicLayout: React.FC<BasicLayoutType> = memo(({ children }) => {
                             <Dropdown
                                 menu={{
                                     items: [
+                                        {
+                                            key: 'userCenter',
+                                            icon: <UserOutlined />,
+                                            label: '个人中心'
+                                        },
                                         {
                                             key: 'logout',
                                             icon: <LogoutOutlined />,
