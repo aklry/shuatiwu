@@ -59,7 +59,8 @@ const BasicLayout: React.FC<BasicLayoutType> = memo(({ children }) => {
     const dispatch = useDispatch()
     const menus = defaultMenus.filter(menu => {
         const menuAccess = menu?.access ?? ACCESS_ENUM.NOT_LOGIN
-        return checkAccess(user, menuAccess)
+        const hideInMenu = menu?.hideInMenu ?? false
+        return checkAccess(user, menuAccess) && !hideInMenu
     })
     const router = useRouter()
     // 注销用户，退出登录

@@ -16,6 +16,12 @@ export const menus = [
         name: '题目'
     },
     {
+        path: '/user/center',
+        name: '个人中心',
+        hideInMenu: true,
+        access: ACCESS_ENUM.USER
+    },
+    {
         path: '/admin',
         name: '管理',
         icon: <CrownOutlined />,
