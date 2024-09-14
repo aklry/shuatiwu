@@ -30,7 +30,7 @@ const Login: React.FC = memo(() => {
         <div>
             <LoginForm<API.UserAddRequest>
                 logo='/logo.png'
-                title='刷题屋'
+                title='智汇问道'
                 subTitle='一个刷题的地方'
                 form={form}
                 onFinish={doSubmit}

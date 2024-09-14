@@ -7,7 +7,21 @@
         height: 100%;
     }
 
+    .logo {
+        margin-right: 10px;
+    }
+
     & :global(.ant-pro-layout .ant-pro-layout-content) {
         padding-block: 20px;
+    }
+
+    & :global(.ant-pro-top-nav-header) {
+        padding: 0 50px;
+    }
+
+    & :global(.ant-layout-header) {
+        position: sticky;
+        top: 0;
+        z-index: 10;
     }
 }

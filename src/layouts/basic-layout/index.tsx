@@ -82,9 +82,9 @@ const BasicLayout: React.FC<BasicLayoutType> = memo(({ children }) => {
     return (
         <div className={styles['basic-layout']}>
             <ProLayout
-                title='刷题屋'
+                title='智汇问道'
                 layout='top'
-                logo={<Image src='/logo.png' width={40} height={40} alt='刷题屋' />}
+                logo={<Image src='/logo.png' width={40} height={40} alt='智汇问道' />}
                 location={{ pathname }}
                 menuItemRender={(item, dom) => (
                     <Link href={item.path || '/'} target={item.target}>
@@ -124,10 +124,10 @@ const BasicLayout: React.FC<BasicLayoutType> = memo(({ children }) => {
                     }
                 }}
                 headerTitleRender={(logo, title) => (
-                    <a>
-                        {logo}
+                    <div>
+                        <div className={styles['logo']}>{logo}</div>
                         {title}
-                    </a>
+                    </div>
                 )}
                 actionsRender={props => {
                     if (props.isMobile) return []

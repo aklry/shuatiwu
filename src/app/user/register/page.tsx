@@ -27,7 +27,7 @@ const Register: React.FC = () => {
         <div>
             <LoginForm<API.UserRegisterRequest>
                 logo='/logo.png'
-                title='刷题屋'
+                title='智汇问道'
                 subTitle='一个刷题的地方'
                 onFinish={doSubmit}
                 form={form}
