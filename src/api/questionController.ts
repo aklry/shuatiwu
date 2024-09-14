@@ -26,6 +26,21 @@ export async function deleteQuestionUsingPost(body: API.DeleteRequest, options?:
     })
 }
 
+/** batchDeleteQuestions POST /api/question/delete/batch */
+export async function batchDeleteQuestionsUsingPost(
+    body: API.QuestionBatchDeleteRequest,
+    options?: { [key: string]: any }
+) {
+    return ryRequest.request<API.BaseResponseBoolean_>('/api/question/delete/batch', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: body,
+        ...(options || {})
+    })
+}
+
 /** editQuestion POST /api/question/edit */
 export async function editQuestionUsingPost(body: API.QuestionEditRequest, options?: { [key: string]: any }) {
     return ryRequest.request<API.BaseResponseBoolean_>('/api/question/edit', {

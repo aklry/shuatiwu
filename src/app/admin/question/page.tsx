@@ -14,6 +14,7 @@ import {
 import MdEditor from '@/components/md-editor'
 import TagList from '@/components/tag-list'
 import { DEFAULT_PAGE_SIZE } from '@/constants'
+import BatchModal from '@/app/admin/question/components/batch-modal'
 
 const Question: React.FC = memo(() => {
     const [dataSource, setDataSource] = useState<API.Question[]>()
@@ -26,6 +27,10 @@ const Question: React.FC = memo(() => {
     const [modalTitle, setModalTitle] = useState<string>('')
     // 是否修改所属题库
     const [isChangeQuestionBank, setIsChangeQuestionBank] = useState<boolean>(false)
+    // 批量添加题目到题库弹窗
+    const [batchAddVisible, setBatchAddVisible] = useState<boolean>(false)
+    // 选择的批量添加的题目id
+    const [batchAddQuestionIds, setBatchAddQuestionIds] = useState<number[]>([])
     const fetchQuestionData = async (pageNumber: number, args?: API.QuestionQueryRequest) => {
         try {
             const requestParams: API.QuestionQueryRequest = args
@@ -217,6 +222,37 @@ const Question: React.FC = memo(() => {
                 editable={{
                     type: 'multiple'
                 }}
+                rowSelection={{}}
+                tableAlertRender={({ selectedRowKeys, onCleanSelected }) => (
+                    <Space>
+                        <span>已选 {selectedRowKeys.length} 项</span>
+                        <a style={{ marginInlineStart: 8 }} onClick={onCleanSelected}>
+                            取消选择
+                        </a>
+                    </Space>
+                )}
+                tableAlertOptionRender={({ selectedRowKeys }) => (
+                    <Space size={16}>
+                        <Button
+                            type='primary'
+                            onClick={() => {
+                                setBatchAddVisible(true)
+                                setBatchAddQuestionIds(selectedRowKeys as number[])
+                            }}
+                        >
+                            批量添加到题库
+                        </Button>
+                        <Button>批量从题库移除</Button>
+                        <Popconfirm
+                            title={'确认删除？'}
+                            description={'删除后将无法恢复，请谨慎操作！'}
+                            okText='确认'
+                            cancelText='取消'
+                        >
+                            <Button danger>批量删除题目</Button>
+                        </Popconfirm>
+                    </Space>
+                )}
                 dataSource={dataSource}
                 rowKey='id'
                 search={{
@@ -246,6 +282,12 @@ const Question: React.FC = memo(() => {
                 onCancel={() => setVisible(false)}
                 isEditBank={isChangeQuestionBank}
                 questionBankId={currentRow?.id}
+            />
+            <BatchModal
+                batchVisible={batchAddVisible}
+                questionIdList={batchAddQuestionIds}
+                onSubmit={() => setBatchAddVisible(false)}
+                onCancel={() => setBatchAddVisible(false)}
             />
         </div>
     )
