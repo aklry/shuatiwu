@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './index.module.scss'
 import QuestionTable from './components/question-table/index'
 import Title from 'antd/es/typography/Title'
-import { listQuestionVoByPageUsingPost } from '@/api/questionController'
+import { searchQuestionVoByPageUsingPost } from '@/api/questionController'
 import { message } from 'antd'
 import { DEFAULT_PAGE_SIZE } from '@/constants'
 import { IQuestionProps } from './type'
@@ -15,8 +15,8 @@ const Questions: React.FC<IQuestionProps> = async ({ searchParams }) => {
     let total = 0
 
     try {
-        const res = await listQuestionVoByPageUsingPost({
-            title: searchText,
+        const res = await searchQuestionVoByPageUsingPost({
+            searchText,
             pageSize: DEFAULT_PAGE_SIZE,
             sortField: 'createTime',
             sortOrder: 'descend'

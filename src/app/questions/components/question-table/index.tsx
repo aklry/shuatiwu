@@ -19,8 +19,15 @@ const QuestionTable: React.FC<IQuestionTableProps> = ({
     const [init, setInit] = useState<boolean>(true)
     const columns = [
         {
-            title: '题目',
+            title: '搜索',
+            dataIndex: 'searchText',
+            valueType: 'text',
+            hideInTable: true
+        },
+        {
+            title: '标题',
             dataIndex: 'title',
+            hideInSearch: true,
             render: (_, record) => <Link href={`/questions/${record.id}`}>{record.title}</Link>
         },
         {
