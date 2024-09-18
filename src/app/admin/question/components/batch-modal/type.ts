@@ -3,4 +3,6 @@ export interface IBatchModalProps {
     batchVisible: boolean
     onCancel?: () => void
     onSubmit?: () => void
+    type: string
+    title: string
 }
