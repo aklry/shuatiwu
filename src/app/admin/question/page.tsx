@@ -7,6 +7,7 @@ import { PlusOutlined } from '@ant-design/icons'
 import CommonModal from '@/app/admin/components/Modal'
 import {
     addQuestionUsingPost,
+    batchDeleteQuestionsUsingPost,
     deleteQuestionUsingPost,
     listQuestionByPageUsingPost,
     updateQuestionUsingPost
@@ -29,8 +30,12 @@ const Question: React.FC = memo(() => {
     const [isChangeQuestionBank, setIsChangeQuestionBank] = useState<boolean>(false)
     // 批量添加题目到题库弹窗
     const [batchAddVisible, setBatchAddVisible] = useState<boolean>(false)
+    // 批量从题库移除题目弹窗
+    const [batchRemoveVisible, setBatchRemoveVisible] = useState<boolean>(false)
     // 选择的批量添加的题目id
     const [batchAddQuestionIds, setBatchAddQuestionIds] = useState<number[]>([])
+    // 选择的批量从题库移除的题目id
+    const [batchRemoveQuestionIds, setBatchRemoveQuestionIds] = useState<number[]>([])
     const fetchQuestionData = async (pageNumber: number, args?: API.QuestionQueryRequest) => {
         try {
             const requestParams: API.QuestionQueryRequest = args
@@ -214,7 +219,21 @@ const Question: React.FC = memo(() => {
             width: 240
         }
     ]
-
+    const handleBatchDeleteQuestion = async (questionIds: number[]) => {
+        try {
+            const res = await batchDeleteQuestionsUsingPost({
+                questionIdList: questionIds
+            })
+            if (res.data) {
+                message.success('批量删除成功')
+                fetchQuestionData(pageNumber)
+            } else {
+                message.error('批量删除失败,' + res.message)
+            }
+        } catch (e: any) {
+            message.error(e.message)
+        }
+    }
     return (
         <div className={styles.question}>
             <ProTable<API.Question>
@@ -242,12 +261,20 @@ const Question: React.FC = memo(() => {
                         >
                             批量添加到题库
                         </Button>
-                        <Button>批量从题库移除</Button>
+                        <Button
+                            onClick={() => {
+                                setBatchRemoveVisible(true)
+                                setBatchRemoveQuestionIds(selectedRowKeys as number[])
+                            }}
+                        >
+                            批量从题库移除
+                        </Button>
                         <Popconfirm
                             title={'确认删除？'}
                             description={'删除后将无法恢复，请谨慎操作！'}
                             okText='确认'
                             cancelText='取消'
+                            onConfirm={() => handleBatchDeleteQuestion(selectedRowKeys as number[])}
                         >
                             <Button danger>批量删除题目</Button>
                         </Popconfirm>
@@ -288,6 +315,16 @@ const Question: React.FC = memo(() => {
                 questionIdList={batchAddQuestionIds}
                 onSubmit={() => setBatchAddVisible(false)}
                 onCancel={() => setBatchAddVisible(false)}
+                type='add'
+                title='批量添加题目'
+            />
+            <BatchModal
+                batchVisible={batchRemoveVisible}
+                questionIdList={batchRemoveQuestionIds}
+                onSubmit={() => setBatchRemoveVisible(false)}
+                onCancel={() => setBatchRemoveVisible(false)}
+                type='remove'
+                title='批量从题库移除题目'
             />
         </div>
     )
