@@ -10,6 +10,7 @@ import Title from 'antd/es/typography/Title'
 import Paragraph from 'antd/es/typography/Paragraph'
 import CalendarChart from './components/calendar-chart'
 import { EditOutlined } from '@ant-design/icons'
+import InfoModal from './components/info-modal'
 
 const UserCenter: React.FC = memo(() => {
     const { user } = useSelector(
@@ -19,10 +20,7 @@ const UserCenter: React.FC = memo(() => {
         shallowEqual
     )
     const [activeTabKey, setActiveTabKey] = useState<string>('record')
-    const handleEditUserInfo = () => {
-        // TODO: 编辑用户信息弹窗
-        console.log('编辑用户信息')
-    }
+    const [visible, setVisible] = useState<boolean>(false)
     return (
         <div className={styles['user-center']}>
             <Row gutter={[16, 16]}>
@@ -30,7 +28,7 @@ const UserCenter: React.FC = memo(() => {
                     <Card
                         className={styles['user-info']}
                         title='个人信息'
-                        extra={<EditOutlined onClick={handleEditUserInfo} />}
+                        extra={<EditOutlined onClick={() => setVisible(true)} />}
                     >
                         <Avatar
                             className={styles['avatar']}
@@ -76,6 +74,7 @@ const UserCenter: React.FC = memo(() => {
                     </Card>
                 </Col>
             </Row>
+            <InfoModal visible={visible} initialValues={user} onCancel={() => setVisible(false)} />
         </div>
     )
 })
