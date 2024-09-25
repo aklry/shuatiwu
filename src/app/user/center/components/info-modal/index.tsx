@@ -6,9 +6,10 @@ import UploadPicture from '@/components/upload-picture'
 import { getLoginUserUsingGet, updateMyUserUsingPost } from '@/api/userController'
 import { useDispatch } from 'react-redux'
 import { setLoginUser } from '@/store/modules/loginUser'
+import { AppDispatch } from '@/store'
 
 const InfoModal: React.FC<InFoModalProps> = memo(({ visible, onCancel, initialValues }) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [imageUrl, setImageUrl] = useState<string>('')
     useEffect(() => {
         if (initialValues) {
