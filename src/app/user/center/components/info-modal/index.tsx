@@ -1,5 +1,5 @@
 'use client'
-import React, { memo, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { Button, Form, FormProps, Input, message, Modal } from 'antd'
 import { InFoModalProps } from './type'
 import UploadPicture from '@/components/upload-picture'
@@ -10,9 +10,11 @@ import { setLoginUser } from '@/store/modules/loginUser'
 const InfoModal: React.FC<InFoModalProps> = memo(({ visible, onCancel, initialValues }) => {
     const dispatch = useDispatch()
     const [imageUrl, setImageUrl] = useState<string>('')
-    if (initialValues) {
-        setImageUrl(initialValues.userAvatar ?? '')
-    }
+    useEffect(() => {
+        if (initialValues) {
+            setImageUrl(initialValues.userAvatar ?? 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png')
+        }
+    }, [initialValues])
     const onFinish: FormProps<API.UserUpdateMyRequest>['onFinish'] = async values => {
         const res = await updateMyUserUsingPost(values)
         if (res.data) {
@@ -28,7 +30,7 @@ const InfoModal: React.FC<InFoModalProps> = memo(({ visible, onCancel, initialVa
     }
     return (
         <div className='user-info-modal'>
-            <Modal title='个人信息' open={visible} onCancel={onCancel}>
+            <Modal title='个人信息' footer={null} open={visible} onCancel={onCancel}>
                 <Form
                     name='basic'
                     labelCol={{ span: 8 }}
