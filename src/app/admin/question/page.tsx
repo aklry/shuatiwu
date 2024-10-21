@@ -158,7 +158,8 @@ const Question: React.FC = memo(() => {
             valueType: 'select',
             width: 180,
             fieldProps: {
-                mode: 'tags'
+                mode: 'tags',
+                placeholder: '请输入标签'
             },
             render: (_, record) => {
                 const tags = JSON.parse(record.tags as string)
