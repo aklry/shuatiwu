@@ -65,12 +65,12 @@ const Question: React.FC = memo(() => {
             setIsChangeQuestionBank(true)
             setCurrentRow(question)
         } else if (question) {
-            setModalTitle('修改用户')
+            setModalTitle('修改题目信息')
             setCurrentRow(question)
             setIsChangeQuestionBank(false)
         } else {
             setCurrentRow(undefined)
-            setModalTitle('新建用户')
+            setModalTitle('新建题目信息')
             setIsChangeQuestionBank(false)
         }
         setVisible(true)

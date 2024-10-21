@@ -33,11 +33,11 @@ const Bank: React.FC = () => {
     }
     const handleShowModal = (questionBank?: API.QuestionBank) => {
         if (questionBank) {
-            setModalTitle('修改用户')
+            setModalTitle('修改题库信息')
             setCurrentRow(questionBank)
         } else {
             setCurrentRow(undefined)
-            setModalTitle('新建用户')
+            setModalTitle('新建题库')
         }
         setVisible(true)
     }
