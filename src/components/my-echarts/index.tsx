@@ -3,8 +3,7 @@ import React, { memo, useEffect, useRef } from 'react'
 import * as echarts from 'echarts'
 import { MyEchartsProps } from './type'
 
-const MyEcharts: React.FC<MyEchartsProps> = memo(props => {
-    const { option } = props
+const MyEcharts: React.FC<MyEchartsProps> = memo(({ option }) => {
     const echartsRef = useRef<HTMLDivElement | null>(null)
     useEffect(() => {
         // 初始化图表
